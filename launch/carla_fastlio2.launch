@@ -1,0 +1,28 @@
+<launch>
+
+  <node name="lidar_fix" pkg="fastlio2_carla"
+        type="lidar_timestamp_fix_node.py" output="screen">
+    <param name="input_topic"  value="/carla/ego_vehicle/lidar"/>
+    <param name="output_topic" value="/points_raw"/>
+  </node>
+
+  <remap from="/Odometry" to="/Odometry_fastlio"/>
+  <rosparam file="$(find fastlio2_carla)/config/carla_velodyne32.yaml"
+            command="load"/>
+  <node name="fastlio_mapping" pkg="fast_lio"
+        type="fastlio_mapping" output="screen">
+  </node>
+
+  <node name="map_to_camera_init" pkg="fastlio2_carla"
+        type="map_to_init_tf.py" output="screen"/>
+
+  <node name="pcl_to_gridmap" pkg="fastlio2_carla" type="pcl_to_gridmap.py" output="screen" />
+  
+  <node name="trajectory_evaluator" pkg="fastlio2_carla" type="trajectory_evaluator.py" output="screen">
+    <param name="gt_topic"    value="/carla/ego_vehicle/odometry"/>
+    <param name="est_topic"   value="/Odometry_fastlio"/>
+    <param name="output_dir"  value="$(env HOME)/trajectory_eval"/>
+    <param name="sync_slop"   value="0.05"/>
+  </node>
+
+</launch>
