@@ -16,7 +16,7 @@ class PclToGridMap:
         rospy.init_node('pcl_to_gridmap')
 
         self.resolution     = rospy.get_param('~resolution',      0.2)
-        self.map_size       = rospy.get_param('~map_size',       600.0)
+        self.map_size       = rospy.get_param('~map_size',       800.0)
         self.max_range      = rospy.get_param('~max_range',       50.0)
         self.angle_step_deg = rospy.get_param('~angle_step_deg',   1.0)
         self.map_frame      = rospy.get_param('~map_frame',  'camera_init')
@@ -45,8 +45,7 @@ class PclToGridMap:
         self.tf_buf      = tf2_ros.Buffer()
         self.tf_listener = tf2_ros.TransformListener(self.tf_buf)
 
-        self.pub = rospy.Publisher(
-            '/local_map', OccupancyGrid, queue_size=1, latch=True)
+        self.pub = rospy.Publisher('/local_map', OccupancyGrid, queue_size=1, latch=True)
         rospy.Subscriber(
             '/cloud_registered', PointCloud2, self.callback, queue_size=1)
 

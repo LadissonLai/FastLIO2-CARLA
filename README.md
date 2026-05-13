@@ -26,15 +26,20 @@ mkdir -p ~/catkin_ws/src
 cd ~/catkin_ws/src
 ```
 
-2. Clone FAST_LIO2 and this repository into `src`:
+2. Clone FAST_LIO2 、carla-ros-bridge and this repository into `src`:
 ```bash
+git clone https://github.com/Livox-SDK/livox_ros_driver.git # driver for fastlio2
 git clone https://github.com/hku-mars/FAST_LIO.git
-git clone <this_repository_url> fastlio2_carla
+git clone https://github.com/LadissonLai/ros-bridge.git -b feat/parking
+git clone https://github.com/LadissonLai/FastLIO2-CARLA.git # this repo
 ```
 
 3. Build the workspace:
 ```bash
-cd ~/catkin_ws
+cd ~/catkin_ws/src
+cd FAST_LIO
+git submodule update --init
+cd ../../
 catkin_make
 source devel/setup.bash
 ```
@@ -47,7 +52,7 @@ source devel/setup.bash
 # ./CarlaUE4.sh
 
 # In another terminal, launch the ROS bridge and spawn a vehicle with a LIDAR
-# roslaunch carla_ros_bridge carla_ros_bridge_with_example_ego_vehicle.launch
+# roslaunch carla_ad_demo parking.launch
 ```
 
 2. Run the `fastlio2_carla` launch file:
