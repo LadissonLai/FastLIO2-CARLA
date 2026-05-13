@@ -4,7 +4,7 @@ This ROS package is designed to adapt and integrate [FAST_LIO2](https://github.c
 
 It resolves common issues with running FastLIO2 directly on simulated point clouds coming from CARLA by fixing LIDAR timestamps and providing necessary coordinate frame transformations. 
 
-[demo](https://youtu.be/tqwpLz1qKqs)
+[![demo video](https://youtu.be/tqwpLz1qKqs/0.jpg)](https://youtu.be/tqwpLz1qKqs)
 
 
 ## Localization Accuracy
